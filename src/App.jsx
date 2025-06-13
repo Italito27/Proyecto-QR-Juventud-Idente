@@ -56,10 +56,11 @@ function App() {
     ]);
 
     if (error) {
-      console.error("Error al guardar en Supabase:", error);
+      console.error("❌ Supabase error:", error);
       alert("No se pudo registrar la asistencia");
     } else {
-      alert(`✅ Asistencia registrada: ${cedula} - ${tipo}`);
+      console.log("✅ Registro guardado:", data);
+      alert(`Asistencia registrada: ${cedula}`);
     }
   };
 
