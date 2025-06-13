@@ -39,7 +39,7 @@ function App() {
   }, []);
 
   const enviarDatos = (texto) => {
-    fetch('https://script.google.com/macros/s/AKfycbwMOzeIl2AB5Aizh4O2cdDwkN6iS3mvP0ho0D6k4XmalBPvnb6jba9MtzSIMq7qnMWV/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbyzcKwZta-mGcM8UWxKuVhaT0wghewnHScSvi6fUwCtG101ElDZm6DQUvvo0-ipOgsx/exec', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ qr: texto }),
