@@ -6,7 +6,9 @@
     "@vercel/analytics": "^1.5.0",
     "html5-qrcode": "^2.3.8",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "vite": "^6.3.5",
+    "@vitejs/plugin-react": "^4.5.2"
   },
   "scripts": {
     "dev": "vite",
@@ -24,9 +26,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.5.2",
-    "vite": "^6.3.5"
   }
 }
