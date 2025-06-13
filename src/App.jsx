@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
+import { supabase } from './supabaseClient';
 import './App.css';
 
 function App() {
@@ -38,15 +39,28 @@ function App() {
     };
   }, []);
 
-  const enviarDatos = (texto) => {
-    fetch('https://script.google.com/macros/s/AKfycbyzcKwZta-mGcM8UWxKuVhaT0wghewnHScSvi6fUwCtG101ElDZm6DQUvvo0-ipOgsx/exec', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ qr: texto }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log('Datos enviados:', data))
-      .catch((err) => console.error('Error al enviar:', err));
+  const enviarDatos = async (texto) => {
+    const [cedula, fechaRaw] = texto.split('#');
+    if (!cedula || !fechaRaw) {
+      alert("Código QR inválido");
+      return;
+    }
+
+    const now = new Date();
+    const hora = now.toTimeString().split(' ')[0];
+    const fecha = `${fechaRaw.slice(0, 4)}-${fechaRaw.slice(4, 6)}-${fechaRaw.slice(6)}`;
+    const tipo = 'entrada'; // Puedes modificar esto según tu lógica
+
+    const { error } = await supabase.from('asistencias').insert([
+      { cedula, fecha, hora, tipo }
+    ]);
+
+    if (error) {
+      console.error("Error al guardar en Supabase:", error);
+      alert("No se pudo registrar la asistencia");
+    } else {
+      alert(`✅ Asistencia registrada: ${cedula} - ${tipo}`);
+    }
   };
 
   return (
